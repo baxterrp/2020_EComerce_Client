@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BaxterCommerce.Client;
+using BaxterCommerceClientApp.Web.Services;
+using BaxterCommerceClientApp.Web.Services.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +28,18 @@ namespace BaxterCommerceClientApp.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IUserService, UserService>();
+
+            // wire up client from web app
+            var eCommApiClientConfig = new ClientConfiguration
+            {
+                BaseAddress = "https://localhost:10001", 
+                MediaType = "application/json"
+            };
+
+            services.AddSingleton<IAuthenticationClient, AuthenticationClient>(sp => new AuthenticationClient(eCommApiClientConfig));
+            services.AddSingleton<IUserRegistrationClient, UserRegistrationClient>(sp => new UserRegistrationClient(eCommApiClientConfig));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

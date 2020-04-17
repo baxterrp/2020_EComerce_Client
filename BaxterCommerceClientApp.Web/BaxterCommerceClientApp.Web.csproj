@@ -9,9 +9,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BaxterCommerce.Client" Version="1.0.1" />
     <PackageReference Include="BaxterCommerce.CommonClasses" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BaxterCommerceClientApp.Web.Services\BaxterCommerceClientApp.Web.Services.csproj" />
   </ItemGroup>
 
 </Project>
