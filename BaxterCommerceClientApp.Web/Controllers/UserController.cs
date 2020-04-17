@@ -18,5 +18,16 @@ namespace BaxterCommerceClientApp.Web.Controllers
         {
             return NoContent();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="loginRequest"></param>
+        /// <returns></returns>
+        [HttpPost("/user/login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest) 
+        {
+            return NoContent();
+        }
     }
 }
