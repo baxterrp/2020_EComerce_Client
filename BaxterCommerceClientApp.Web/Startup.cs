@@ -40,6 +40,13 @@ namespace BaxterCommerceClientApp.Web
             services.AddSingleton<IAuthenticationClient, AuthenticationClient>(sp => new AuthenticationClient(eCommApiClientConfig));
             services.AddSingleton<IUserRegistrationClient, UserRegistrationClient>(sp => new UserRegistrationClient(eCommApiClientConfig));
 
+            services.AddCors(sp => sp.AddPolicy("StandardPolicy", builder =>
+            {
+                builder
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader();
+            }));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -58,7 +65,7 @@ namespace BaxterCommerceClientApp.Web
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseCors();
+            app.UseCors("StandardPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
