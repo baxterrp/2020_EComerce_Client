@@ -30,15 +30,12 @@ namespace BaxterCommerceClientApp.Web
         {
             services.AddSingleton<IUserService, UserService>();
 
-            // wire up client from web app
-            var eCommApiClientConfig = new ClientConfiguration
-            {
-                BaseAddress = "https://localhost:10001", 
-                MediaType = "application/json"
-            };
+            var config = new ClientConfiguration();
+            Configuration.GetSection("ClientConfiguration").Bind(config);
+            services.AddSingleton(config);
 
-            services.AddSingleton<IAuthenticationClient, AuthenticationClient>(sp => new AuthenticationClient(eCommApiClientConfig));
-            services.AddSingleton<IUserRegistrationClient, UserRegistrationClient>(sp => new UserRegistrationClient(eCommApiClientConfig));
+            services.AddSingleton<IAuthenticationClient, AuthenticationClient>();
+            services.AddSingleton<IUserRegistrationClient, UserRegistrationClient>();
 
             services.AddCors(sp => sp.AddPolicy("StandardPolicy", builder =>
             {
