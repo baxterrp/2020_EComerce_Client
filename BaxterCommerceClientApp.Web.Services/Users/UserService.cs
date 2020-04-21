@@ -6,18 +6,13 @@ using System.Threading.Tasks;
 namespace BaxterCommerceClientApp.Web.Services.Users
 {
     /// <summary>
-    /// 
+    /// Services for handling <see cref="UserResource"/>
     /// </summary>
     public class UserService : IUserService
     {
         private readonly IAuthenticationClient _authenticationClient;
         private readonly IUserRegistrationClient _userRegistrationClient;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="authenticationClient"></param>
-        /// <param name="userRegistrationClient"></param>
         public UserService(IAuthenticationClient authenticationClient, IUserRegistrationClient userRegistrationClient)
         {
             _authenticationClient = authenticationClient ?? throw new ArgumentNullException(nameof(authenticationClient));
@@ -25,10 +20,8 @@ namespace BaxterCommerceClientApp.Web.Services.Users
         }
 
         /// <summary>
-        /// 
+        /// Implements <see cref="IUserService.LoginUser(LoginRequest)"/>
         /// </summary>
-        /// <param name="loginRequest"></param>
-        /// <returns></returns>
         public async Task<LoginResponse> LoginUser(LoginRequest loginRequest)
         {
             var response = await _authenticationClient.Login(loginRequest);
@@ -37,10 +30,8 @@ namespace BaxterCommerceClientApp.Web.Services.Users
         }
 
         /// <summary>
-        /// 
+        /// Implements <see cref="IUserService.RegisterNewUser(UserResource)"/>
         /// </summary>
-        /// <param name="userResource"></param>
-        /// <returns></returns>
         public async Task<UserResource> RegisterNewUser(UserResource userResource)
         {
             var user = await _userRegistrationClient.RegisterNewUser(userResource);

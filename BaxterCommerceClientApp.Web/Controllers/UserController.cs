@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace BaxterCommerceClientApp.Web.Controllers
 {
     /// <summary>
-    /// 
+    /// Controller for handling <see cref="UserResource"/>
     /// </summary>
     public class UserController : ControllerBase
     {
@@ -20,18 +20,19 @@ namespace BaxterCommerceClientApp.Web.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Registers a new <see cref="UserResource"/>
         /// </summary>
-        /// <returns></returns>
+        /// <param name="userResource"><see cref="UserResource"/></param>
+        /// <returns>The registered <see cref="UserResource"/></returns>
         [HttpPost("/user/register")]
         public async Task<IActionResult> RegisterUser([FromBody] UserResource userResource) =>
             await ExecuteControllerAction(async () => { return await _userService.RegisterNewUser(userResource); });
 
         /// <summary>
-        /// 
+        /// Logs in using a <see cref="LoginRequest"/>
         /// </summary>
-        /// <param name="loginRequest"></param>
-        /// <returns></returns>
+        /// <param name="loginRequest"><see cref="LoginRequest"/></param>
+        /// <returns><see cref="LoginResponse"/></returns>
         [HttpPost("/user/login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest) =>
             await ExecuteControllerAction(async () => { return await _userService.LoginUser(loginRequest); });
