@@ -1,4 +1,5 @@
-﻿using BaxterCommerce.CommonClasses.Users;
+﻿using BaxterCommerce.CommonClasses;
+using BaxterCommerce.CommonClasses.Users;
 using BaxterCommerceClientApp.Web.Services;
 using BaxterCommerceClientApp.Web.Services.ApiError;
 using Microsoft.AspNetCore.Mvc;
@@ -44,7 +45,7 @@ namespace BaxterCommerceClientApp.Web.Controllers
             {
                 return Ok(await action());
             }
-            catch (Exception ex)
+            catch (ApiException ex)
             {
                 var error = new ApiError();
                 error.Messages.Add(ex.Message);
