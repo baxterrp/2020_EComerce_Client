@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BaxterCommerce.Client;
 using BaxterCommerceClientApp.Web.Services;
+using BaxterCommerceClientApp.Web.Services.Products;
 using BaxterCommerceClientApp.Web.Services.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +30,7 @@ namespace BaxterCommerceClientApp.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IUserService, UserService>();
+            services.AddSingleton<IProductGroupService, ProductGroupService>();
 
             var config = new ClientConfiguration();
             Configuration.GetSection("ClientConfiguration").Bind(config);

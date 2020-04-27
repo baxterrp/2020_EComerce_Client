@@ -1,7 +1,5 @@
-﻿using BaxterCommerce.CommonClasses;
-using BaxterCommerce.CommonClasses.Users;
+﻿using BaxterCommerce.CommonClasses.Users;
 using BaxterCommerceClientApp.Web.Services;
-using BaxterCommerceClientApp.Web.Services.ApiError;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -11,7 +9,7 @@ namespace BaxterCommerceClientApp.Web.Controllers
     /// <summary>
     /// Controller for handling <see cref="UserResource"/>
     /// </summary>
-    public class UserController : ControllerBase
+    public class UserController : BaseClientController
     {
         private readonly IUserService _userService;
 
@@ -37,21 +35,5 @@ namespace BaxterCommerceClientApp.Web.Controllers
         [HttpPost("/user/login")]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest) =>
             await ExecuteControllerAction(async () => { return await _userService.LoginUser(loginRequest); });
-            
-
-        private async Task<IActionResult> ExecuteControllerAction(Func<Task<object>> action)
-        {
-            try
-            {
-                return Ok(await action());
-            }
-            catch (ApiException ex)
-            {
-                var error = new ApiError();
-                error.Messages.Add(ex.Message);
-
-                return BadRequest(error);
-            }
-        }
     }
 }
