@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BaxterCommerce.Client" Version="1.0.9" />
-    <PackageReference Include="BaxterCommerce.CommonClasses" Version="1.0.9" />
+    <PackageReference Include="BaxterCommerce.Client" Version="1.0.12" />
+    <PackageReference Include="BaxterCommerce.CommonClasses" Version="1.0.10" />
   </ItemGroup>
 
 </Project>

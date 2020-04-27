@@ -1,6 +1,7 @@
-﻿using BaxterCommerce.CommonClasses.Products;
+﻿using BaxterCommerce.Client;
+using BaxterCommerce.CommonClasses.Products;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BaxterCommerceClientApp.Web.Services.Products
@@ -10,16 +11,25 @@ namespace BaxterCommerceClientApp.Web.Services.Products
     /// </summary>
     public class ProductGroupService : IProductGroupService
     {
+        private readonly IFindProductGroupClient _findProductGroupClient;
+        private readonly ICreateProductGroupClient _createProductGroupClient;
+
+        public ProductGroupService(IFindProductGroupClient findProductGroupClient, ICreateProductGroupClient createProductGroupClient)
+        {
+            _findProductGroupClient = findProductGroupClient ?? throw new ArgumentNullException(nameof(findProductGroupClient));
+            _createProductGroupClient = createProductGroupClient ?? throw new ArgumentNullException(nameof(createProductGroupClient));
+        }
+
         /// <summary>
         /// Implements <see cref="IProductGroupService.CreateProductGroup(ProductGroup)"/>
         /// </summary>
-        public Task<ProductGroup> CreateProductGroup(ProductGroup productGroup) =>
-            Task.FromResult(new ProductGroup { Name = "Test" });
+        public async Task<ProductGroup> CreateProductGroup(ProductGroup productGroup) =>
+            await _createProductGroupClient.AddProductGroup(productGroup);
 
         /// <summary>
         /// Implements <see cref="IProductGroupService.GetAllProductGroups"/>
         /// </summary>
-        public Task<IEnumerable<ProductGroup>> GetAllProductGroups() =>
-            Task.FromResult(Enumerable.Empty<ProductGroup>());
+        public async Task<IEnumerable<ProductGroup>> GetAllProductGroups() =>
+            await _findProductGroupClient.GetAllProductGroups();
     }
 }

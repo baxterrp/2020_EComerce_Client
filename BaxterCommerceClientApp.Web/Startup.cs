@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BaxterCommerce.Client;
+﻿using BaxterCommerce.Client;
+using BaxterCommerce.Client.Products;
+using BaxterCommerce.Client.Users;
 using BaxterCommerceClientApp.Web.Services;
 using BaxterCommerceClientApp.Web.Services.Products;
 using BaxterCommerceClientApp.Web.Services.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace BaxterCommerceClientApp.Web
 {
@@ -38,6 +33,8 @@ namespace BaxterCommerceClientApp.Web
 
             services.AddSingleton<IAuthenticationClient, AuthenticationClient>();
             services.AddSingleton<IUserRegistrationClient, UserRegistrationClient>();
+            services.AddSingleton<ICreateProductGroupClient, CreateProductGroupClient>();
+            services.AddSingleton<IFindProductGroupClient, FindProductGroupClient>();
 
             services.AddCors(sp => sp.AddPolicy("StandardPolicy", builder =>
             {
